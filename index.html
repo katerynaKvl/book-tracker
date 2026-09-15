@@ -7,15 +7,78 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <!-- Шапка з навігацією -->
+    <!-- Шапка з назвою застосунку -->
+    <header>
+        <h1>Трекер прочитаних книг</h1>
+        <nav>
+            <ul>
+                <li><a href="#add-book">Додати книгу</a></li>
+                <li><a href="#my-books">Мої книги</a></li>
+                <li><a href="#statistics">Статистика</a></li>
+            </ul>
+        </nav>
+    </header>
 
-    <!-- Форма додавання книги -->
+    <main>
+        <!-- Форма додавання книги -->
+        <section id="add-book">
+            <h2>Додати книгу</h2>
+            <form action="#">
 
-    <!-- Список книг: картки з автором і статусом -->
+                <div>
+                    <label for="book-title">Назва книги:</label>
+                    <input type="text" id="book-title" name="title" placeholder="Введіть назву книги..." required>
+                </div>
+
+                <div>
+                    <label for="book-author">Автор:</label>
+                    <input type="text" id="book-author" name="author" placeholder="Введіть автора..." required>
+                </div>
+
+                <div>
+                    <label for="book-status">Статус читання:</label>
+                    <select id="book-status" name="status">
+                        <option value="reading">Читаю</option>
+                        <option value="completed">Прочитано</option>
+                        <option value="planned">У планах</option>
+                        <option value="gaveup">Закинуто</option>
+                    </select>
+                </div>
+                <button type="submit">Зберегти книгу</button>
+            </form>
+        </section>
+
+        <!-- Список книг: картки з автором і статусом -->
+        <section id="my-books">
+            <h2>Мої книги</h2>
+
+            <article>
+                <h3>Елегантний всесвіт</h3>
+                <p>Автор: Браян Грін</p>
+                <p>Статус: Читаю</p>
+            </article>
+
+            <article>
+                <h3>Таємна історія</h3>
+                <p>Автор: Донна тарт</p>
+                <p>Статус: Прочитано</p>
+            </article>
+        </section>
+    </main>
 
     <!-- Блок статистики читання -->
+    <aside id="statistics">
+        <h2>Статистика читання</h2>
+        <p>Всього доданих книг: 40</p>
+        <p>Прочитане за місяць: 4</p>
+        <p>Книги в процесі читання: 2</p>
+        <p>Закинуті книги: 6</p>
+    </aside>
 
     <!-- Підвал -->
+    <footer>
+        <p>Проєкт створено для навчальних цілей. &copy; Коваль К.А. 2026</p>
+    </footer>
     
     <script src="js/app.js"></script>
 </body>
