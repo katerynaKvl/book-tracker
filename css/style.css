@@ -9,21 +9,21 @@ body{
     font-family: system-ui, sans-serif;
     font-size: 1rem;
     line-height: 1.5;
-    color: #1e1514;
-    background-color: #716f78;
+    color: #260808;
+    background-color: #d7c5af;
 }
 
 header {
-    background-color: #3a3336;
-    color:#716f78;
+    background-color: #593c33;
+    color:#d7c5af;
     padding: 24px 16px;
-    border-bottom: 8px solid #1e1514;
+    border-bottom: 8px solid #260808;
 }
 
 header h1{
     margin: 0 0 12px 0;
     font-size: 1.8rem;
-    color: #9097a7;
+    color: #d7c5af;
 }
 
 nav ul {
@@ -38,7 +38,7 @@ nav li{
 }
 
 nav a{
-    color: #716f78;
+    color: #d7c5afc7;
     text-decoration: none;
     font-size: 1.1rem;
     font-weight: 900;
@@ -60,8 +60,8 @@ section{
 }
 
 h2{
-    color:#3a3336;
-    border-bottom: 2px solid #1e1514;
+    color:#593c33;
+    border-bottom: 2px solid #260808;
     padding-bottom: 6px;
     margin-bottom: 16px;
     font-weight: 900;
@@ -72,7 +72,7 @@ h2{
     display: block;
     margin-bottom: 6px;
     font-weight: 650;
-    color: #3a3336;
+    color: #593c33;
 }
 
 #add-book form > div{
@@ -83,76 +83,77 @@ h2{
 #add-book select{
     width: 100%;
     padding: 8px 10px;
-    border: 1px solid #1e1514;
+    border: 1px solid #260808;
     border-radius: 6px;
     font-size: 0.8rem;
-    background-color: #9097a7;
+    background-color: #efe4d7;
 }
 #add-book input[type="text"]:focus,
 #add-book select:focus{
     outline: none;
-    border-color: #9097a7;
+    border-color: #efe4d7;
 }
 
 #add-book button{
-    background-color: #9097a7;
-    color:#3a3336;
+    background-color: #efe4d7;
+    color:#593c33;
     padding: 10px 20px;
     margin-top: 12px;
-    border: 1px solid #1e1514;
+    border: 1px solid #260808;
     border-radius: 6px;
     font-size: 0.8rem;
     font-weight: 700;
 }
 #add-book button:hover{
-    background-color: #3a3336;
-    color: #1e1514;
+    background-color: #593c33;
+    color: #260808;
 }
 
-article{
-    background-color: #716f78;
-    border: 1px solid #1e1514;
+.card {
+    background-color: #d7c5af;
+    border: 1px solid #260808;
     border-radius: 6px;
     padding: 16px;
     margin-bottom: 16px;
 }
 
-article h3{
+.card h3{
     margin-top: 0;
     margin-bottom: 8px;
-    color: #3a3336;
+    color: #593c33;
 }
 
-article p{
+.card p{
     margin: 4px 0;
-    color: #3a3336;
+    color: #593c33;
 }
 
 .cover-placeholder{
     width: 120px;
     height: 160px;
-    background-color: #9097a7;
-    border: 2px dashed #1e1514;
+    background-color: #efe4d7;
+    border: 2px dashed #260808;
     border-radius: 4px;
     margin-bottom: 12px;
 
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #3a3336;
+    color: #593c33;
     font-size: 0.85rem;
 }
 
 aside{
-    color:#716f78;
-    background-color: #3a3336;
+    color:#d7c5afc7;
+    background-color: #593c33;
+    font-weight: 600;
     border: none;
-    border-left: 8px solid #1e1514;
+    border-left: 8px solid #260808;
     padding: 16px 20px;
     margin-bottom: 32px;
 }
 aside h2{
-    color: #716f78;
+    color: #d7c5af;
     font-weight: 700;
     margin-top: 0;
     border-bottom: none;
@@ -164,8 +165,8 @@ aside p{
 }
 
 footer{
-    background-color: #716f78;
-    color: #1e1514;
+    background-color: #d7c5af;
+    color: #260808;
     text-align: center;
     padding: 16px;
     font-size:0.8rem;
