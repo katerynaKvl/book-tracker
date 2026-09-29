@@ -1,87 +1,121 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="uk">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Трекер прочитаних книг</title>
-    <link rel="stylesheet" href="css/style.css">
-</head>
-<body>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
     <!-- Шапка з назвою застосунку -->
     <header>
-        <h1>Трекер прочитаних книг</h1>
-        <nav>
-            <ul>
-                <li><a href="#add-book">Додати книгу</a></li>
-                <li><a href="#my-books">Мої книги</a></li>
-                <li><a href="#statistics">Статистика</a></li>
-            </ul>
-        </nav>
+      <h1>Трекер прочитаних книг</h1>
+      <nav>
+        <ul>
+          <li><a href="#add-book">Додати книгу</a></li>
+          <li><a href="#my-books">Мої книги</a></li>
+          <li><a href="#statistics">Статистика</a></li>
+        </ul>
+      </nav>
     </header>
-
-    <main>
+    <div class="page-layout">
+      <main>
         <!-- Форма додавання книги -->
         <section id="add-book">
-            <h2>Додати книгу</h2>
-            <form action="#">
+          <h2>Додати книгу</h2>
+          <form action="#">
+            <div>
+              <label for="book-title">Назва книги:</label>
+              <input
+                type="text"
+                id="book-title"
+                name="title"
+                placeholder="Введіть назву книги..."
+                required
+              />
+            </div>
 
-                <div>
-                    <label for="book-title">Назва книги:</label>
-                    <input type="text" id="book-title" name="title" placeholder="Введіть назву книги..." required>
-                </div>
+            <div>
+              <label for="book-author">Автор:</label>
+              <input
+                type="text"
+                id="book-author"
+                name="author"
+                placeholder="Введіть автора..."
+                required
+              />
+            </div>
 
-                <div>
-                    <label for="book-author">Автор:</label>
-                    <input type="text" id="book-author" name="author" placeholder="Введіть автора..." required>
-                </div>
-
-                <div>
-                    <label for="book-status">Статус читання:</label>
-                    <select id="book-status" name="status">
-                        <option value="reading">Читаю</option>
-                        <option value="completed">Прочитано</option>
-                        <option value="planned">У планах</option>
-                        <option value="gaveup">Закинуто</option>
-                    </select>
-                </div>
-                <button type="submit">Зберегти книгу</button>
-            </form>
+            <div>
+              <label for="book-status">Статус читання:</label>
+              <select id="book-status" name="status">
+                <option value="reading">Читаю</option>
+                <option value="completed">Прочитано</option>
+                <option value="planned">У планах</option>
+                <option value="gaveup">Закинуто</option>
+              </select>
+            </div>
+            <button type="submit">Зберегти книгу</button>
+          </form>
         </section>
 
         <!-- Список книг: картки з автором і статусом -->
         <section id="my-books">
-            <h2>Мої книги</h2>
-
+          <h2>Мої книги</h2>
+          <div class="cards">
             <article class="card">
-                <h3>Елегантний всесвіт</h3>
-                <div class="cover-placeholder">Обкладинка</div>
-                <p>Автор: Браян Грін</p>
-                <p>Статус: Читаю</p>
+              <div class="cover-placeholder">Обкладинка</div>
+              <h3>Елегантний всесвіт</h3>
+              <p>Автор: Браян Грін</p>
+              <p>Статус: Читаю</p>
             </article>
 
             <article class="card">
-                <h3>Таємна історія</h3>
-                <div class="cover-placeholder">Обкладинка</div>
-                <p>Автор: Донна тарт</p>
-                <p>Статус: Прочитано</p>
+              <div class="cover-placeholder">Обкладинка</div>
+              <h3>Таємна історія</h3>
+              <p>Автор: Донна тарт</p>
+              <p>Статус: Прочитано</p>
             </article>
+
+             <article class="card">
+              <div class="cover-placeholder">Обкладинка</div>
+              <h3>Ніби ми злодії</h3>
+              <p>Автор: М.Л.Ріо</p>
+              <p>Статус: Прочитано</p>
+            </article>
+
+             <article class="card">
+              <div class="cover-placeholder">Обкладинка</div>
+              <h3>Оповідь про мистецтво</h3>
+              <p>Автор: Ернст Гомбріх</p>
+              <p>Статус: Читаю</p>
+            </article>
+
+             <article class="card">
+              <div class="cover-placeholder">Обкладинка</div>
+              <h3>Орландо</h3>
+              <p>Автор: Вірджинія Вулф</p>
+              <p>Статус: Прочитано</p>
+            </article>
+          </div>
         </section>
-    </main>
+      </main>
 
-    <!-- Блок статистики читання -->
-    <aside id="statistics">
+      <!-- Блок статистики читання -->
+      <aside id="statistics">
         <h2>Статистика читання</h2>
         <p>Всього доданих книг: 40</p>
         <p>Прочитане за місяць: 4</p>
         <p>Книги в процесі читання: 2</p>
         <p>Закинуті книги: 6</p>
-    </aside>
+      </aside>
+    </div>
 
     <!-- Підвал -->
     <footer>
-        <p>Проєкт створено для навчальних цілей. &copy; Коваль К.А. 2026</p>
+      <p>Проєкт створено для навчальних цілей. &copy; Коваль К.А. 2026</p>
     </footer>
-    
+
     <script src="js/app.js"></script>
-</body>
+  </body>
 </html>
