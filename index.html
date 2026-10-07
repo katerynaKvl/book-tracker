@@ -2,6 +2,12 @@
 <html lang="uk">
   <head>
     <meta charset="UTF-8" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link 
+      href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Merriweather:wght@700&display=swap"
+      rel="stylesheet"
+    />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Трекер прочитаних книг</title>
     <link rel="stylesheet" href="css/style.css" />
@@ -66,36 +72,46 @@
             <article class="card">
               <div class="cover-placeholder">Обкладинка</div>
               <h3>Елегантний всесвіт</h3>
-              <p>Автор: Браян Грін</p>
-              <p>Статус: Читаю</p>
+              <p class="author">Браян Грін</p>
+              <div class="status-wrapper">
+                <span class="status-badge status-reading">Читаю</p>
+              </div>
             </article>
 
             <article class="card">
               <div class="cover-placeholder">Обкладинка</div>
               <h3>Таємна історія</h3>
-              <p>Автор: Донна тарт</p>
-              <p>Статус: Прочитано</p>
+              <p class="author">Донна Тарт</p>
+              <div class="status-wrapper">
+                <span class="status-badge status-completed">Прочитано</p>
+              </div>
             </article>
 
              <article class="card">
               <div class="cover-placeholder">Обкладинка</div>
               <h3>Ніби ми злодії</h3>
-              <p>Автор: М.Л.Ріо</p>
-              <p>Статус: Прочитано</p>
+              <p class="author">М.Л. Ріо</p>
+              <div class="status-wrapper">
+                <span class="status-badge status-completed">Прочитано</p>
+              </div>
             </article>
 
              <article class="card">
               <div class="cover-placeholder">Обкладинка</div>
               <h3>Оповідь про мистецтво</h3>
-              <p>Автор: Ернст Гомбріх</p>
-              <p>Статус: Читаю</p>
+              <p class="author">Ернст Гомбріх</p>
+              <div class="status-wrapper">
+                <span class="status-badge status-gaveup">Закинуто</p>
+              </div>
             </article>
 
              <article class="card">
               <div class="cover-placeholder">Обкладинка</div>
               <h3>Орландо</h3>
-              <p>Автор: Вірджинія Вулф</p>
-              <p>Статус: Прочитано</p>
+              <p class="author">Вірджинія Вульф</p>
+              <div class="status-wrapper">
+                <span class="status-badge status-planned">В планах</p>
+              </div>
             </article>
           </div>
         </section>

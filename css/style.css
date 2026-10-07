@@ -4,13 +4,33 @@
     box-sizing: border-box;
 }
 
+/*Вимога з позначенням статусу прочитання кольором. 
+Використані кольори: 
+.status-reading Читаю  #9d5100 темно оранжевий; 
+.status-completed Завершено #2b5e3b зелений; 
+.status-planned  В планах  #543b81 фіолетовий; 
+.status-gaveup  Закинуто  #636363 сірий. 
+Вибір виконувався на основі людських базових асоціацій.
+Зелений яскравий позначення чогось хорошо позитивного як от прочитана книга; 
+жовтий останній ривок в очікуванні(до прикладу світло світлофора);
+сірий непомітний хмурий колір людина вже остигла до книги закинула не оцінила її; 
+фіолетовий незвичний приєсний яскравий колір як нагадування про цікавинки що очікують. */
+
+
 body{
     margin: 0;
-    font-family: system-ui, sans-serif;
+    font-family: "Lora", system-ui, sans-serif;
     font-size: 1rem;
     line-height: 1.5;
     color: #260808;
     background-color: #d7c5af;
+}
+
+h1, h2, h3{
+    font-family: "Merriweather", Georgia, serif;
+    font-weight: 900;
+    line-height: 1.25;
+    margin-top: 0;
 }
 
 img{
@@ -53,7 +73,7 @@ nav li{
 }
 
 nav a{
-    color: #d7c5afc7;
+    color: #beac96;
     text-decoration: none;
     font-size: 1.1rem;
     font-weight: 900;
@@ -66,10 +86,10 @@ nav a:hover{
 .page-layout{
     max-width: 1200px;
     margin: 0 auto;
-    padding: 24px 16px;
+    padding: 32px 16px;
     display: flex;
     flex-direction: column;
-    gap: 24px;
+    gap: 32px;
 }
 
 main{
@@ -77,7 +97,7 @@ main{
 }
 
 section{
-    margin-bottom: 15px;
+    margin-bottom: 32px;
 }
 
 h2{
@@ -85,8 +105,8 @@ h2{
     border-bottom: 2px solid #260808;
     padding-bottom: 6px;
     margin-bottom: 16px;
-    margin-top: 0;
-    font-weight: 900;
+    font-size: 1.5rem;
+    
 }
 
 
@@ -128,30 +148,34 @@ h2{
 }
 #add-book button:hover{
     background-color: #593c33;
-    color: #260808;
+    color: #efe4d7;
 }
 
 .cards{
     display: grid;
     grid-template-columns: 1fr;
-    gap: 16px;
+    gap: 20px;
 }
 
 .card {
-    background-color: #d7c5af;
+    background-color: #efe4d7;
     border: 1px solid #260808;
     border-radius: 6px;
     padding: 16px;
     min-width: 0;
+    display: flex;
+    flex-direction: column;
 }
 
 .card h3{
+    font-size: 1.125rem;
     margin-top: 0;
-    margin-bottom: 8px;
+    margin-bottom: 4px;
     color: #593c33;
 }
 
 .card p{
+    font-size: 1rem;
     margin: 4px 0;
     color: #593c33;
 }
@@ -160,8 +184,8 @@ h2{
 .cover-placeholder{
     width: 100%;
     max-width: 120px;
-    height: 160px;
-    background-color: #efe4d7;
+    height: 180px;
+    background-color: #d7c5af;
     border: 2px dashed #260808;
     border-radius: 4px;
     margin-bottom: 12px;
@@ -174,14 +198,32 @@ h2{
     font-size: 0.85rem;
 }
 
+.status-wrapper{
+    margin-top: auto;
+}
+
+.status-badge{
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #efe4d7;
+}
+
+.status-reading   { background-color: #9d5100; }
+.status-completed { background-color: #2b5e3b; }
+.status-planned   { background-color: #543b81; }
+.status-gaveup    { background-color: #636363; }
+
 aside{
-    color:#d7c5afc7;
+    color:#beac96;
     background-color: #593c33;
     font-weight: 600;
     border: none;
     border-left: 8px solid #260808;
     border-radius: 8px;
-    padding: 16px 20px;
+    padding: 16px;
     margin-top: 15px;
 }
 
