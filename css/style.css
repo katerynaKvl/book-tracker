@@ -73,7 +73,7 @@ nav li{
 }
 
 nav a{
-    color: #beac96;
+    color: #c8b59f;
     text-decoration: none;
     font-size: 1.1rem;
     font-weight: 900;
@@ -133,7 +133,7 @@ h2{
 #add-book input[type="text"]:focus,
 #add-book select:focus{
     outline: none;
-    border-color: #efe4d7;
+    border: 2px solid #593c33;
 }
 
 #add-book button{
@@ -183,8 +183,9 @@ h2{
 
 .cover-placeholder{
     width: 100%;
-    max-width: 120px;
-    height: 180px;
+    /*max-width: 120px;
+    height: 180px;*/
+    aspect-ratio: 2 / 3;
     background-color: #d7c5af;
     border: 2px dashed #260808;
     border-radius: 4px;
@@ -217,7 +218,7 @@ h2{
 .status-gaveup    { background-color: #636363; }
 
 aside{
-    color:#beac96;
+    color:#c8b59f;
     background-color: #593c33;
     font-weight: 600;
     border: none;
