@@ -49,6 +49,19 @@
                 id="book-author"
                 name="author"
                 placeholder="Введіть автора..."
+                pattern="[^0-9]+"
+                required
+              />
+            </div>
+
+            <div>
+              <label for="book-pages">Кількість сторінок:</label>
+              <input
+                type="number"
+                id="book-pages"
+                name="pages"
+                min="1"
+                placeholder="Введіть кількість сторінок..."
                 required
               />
             </div>

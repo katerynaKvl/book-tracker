@@ -136,6 +136,21 @@ h2{
     border: 2px solid #593c33;
 }
 
+#add-book input[type="number"],
+#add-book select{
+    width: 100%;
+    padding: 8px 10px;
+    border: 1px solid #260808;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    background-color: #efe4d7;
+}
+#add-book input[type="number"]:focus,
+#add-book select:focus{
+    outline: none;
+    border: 2px solid #593c33;
+}
+
 #add-book button{
     background-color: #efe4d7;
     color:#593c33;

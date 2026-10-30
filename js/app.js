@@ -108,3 +108,63 @@ const dayCount = 30;
 const dailyPages = pagesPerDay(totalPages, dayCount);
 
 console.log(`Середня кількість прочитаних сторінок на день(${dayCount} днів): ${dailyPages} стор.`);
+
+
+//Обробка події submit для додавання нової книги без перевантаження
+const form = document.querySelector('#add-book form');
+form.addEventListener('submit', event =>{
+    //скасування стандартного перевантаження
+    event.preventDefault(); 
+
+    //зчитування даних із полів форми
+    const title = document.querySelector('#book-title').value.trim();
+    const author = document.querySelector('#book-author').value.trim();
+    const pages = Number(document.querySelector('#book-pages').value);
+    const status = document.querySelector('#book-status').value;
+
+    const finished = (status === 'completed');
+
+    //формування нового об'єкта та додавання до масиву
+    const newBook = {
+        title: title,
+        author: author,
+        pages: pages,
+        finished: finished,
+        status: status
+    };
+    books.push(newBook);
+
+    //перемалювання списку книг на сторінці
+    renderBooks(books);
+
+    //очищення полів форми
+    form.reset();
+});
+
+
+//валідація поля автора(щоб не складалося лише з цифр)
+const authorInput = document.querySelector('#book-author');
+authorInput.addEventListener('input', () =>{
+    const value = authorInput.value;
+    const onlyDigits = /^\d+$/.test(value);
+
+    if(onlyDigits){
+        authorInput.setCustomValidity('Імя автора не може складатися тільки з цифр!');
+    } else{
+        authorInput.setCustomValidity('');
+    }
+});
+
+// Перемикання статусу книги між «читаю»/«прочитано» та оновлення лічильника.
+listContainer.addEventListener('change', event =>{
+    if(event.target.classList.contains('book-status-select')){
+        const card = event.target.closest('.card');
+        const index = Array.form(listContainer.children).indexOf(card);
+
+        const newStatus = event.target.value;
+        books[index].status = newStatus;
+        books[index].finished = (newStatus === 'completed');
+
+        renderBooks(books);
+    }
+});
