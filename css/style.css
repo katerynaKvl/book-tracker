@@ -218,20 +218,6 @@ h2{
     margin-top: auto;
 }
 
-.status-badge{
-    display: inline-block;
-    padding: 4px 10px;
-    border-radius: 4px;
-    font-size: 0.8rem;
-    font-weight: 700;
-    color: #efe4d7;
-}
-
-.status-reading   { background-color: #9d5100; }
-.status-completed { background-color: #2b5e3b; }
-.status-planned   { background-color: #543b81; }
-.status-gaveup    { background-color: #636363; }
-
 aside{
     color:#c8b59f;
     background-color: #593c33;
@@ -286,4 +272,49 @@ footer{
         grid-template-columns: repeat(5, 1fr);
         gap: 16px;
     }
+}
+
+.book-status-select {
+    width: 100%;
+    font-family: inherit;
+    font-size: 0.8rem;
+    font-weight: 700;
+    padding: 6px 10px;
+    border: 1px solid #260808;
+    border-radius: 4px;
+    background-color: #efe4d7;
+    color: #593c33;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.book-status-select:hover {
+    background-color: #e5d7c5;
+}
+
+.book-status-select:focus {
+    outline: none;
+    border: 2px solid #593c33;
+}
+
+.book-status-select.status-reading    { background-color: #9d5100; color: #efe4d7; }
+.book-status-select.status-completed { background-color: #2b5e3b; color: #efe4d7; }
+.book-status-select.status-planned   { background-color: #543b81; color: #efe4d7; }
+.book-status-select.status-gaveup    { background-color: #636363; color: #efe4d7; }
+
+.refresh-btn{
+    background-color: #efe4d7;
+    color: #593c33;
+    padding: 10px 20px;
+    border: 1px solid #260808;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: inline-block;
+}
+.refresh-btn:hover {
+    background-color: #593c33;
+    color: #efe4d7;
 }

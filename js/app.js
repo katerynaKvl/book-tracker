@@ -1,6 +1,8 @@
 console.log('app.js підключено');
 
-const books = [
+const API_URL = 'https://openlibrary.org/search.json?q=harrypotter';
+
+let books = [
     { title: 'Елегантний всесвіт', author: 'Браян Грін', pages: 400, finished: false, status: 'reading' },
     { title: 'Таємна історія', author: 'Донна Тарт', pages: 560, finished: true, status: 'completed' },
     { title: 'Ніби ми злодії', author: 'М.Л. Ріо',  pages: 430, finished: true, status: 'completed' },
@@ -45,29 +47,31 @@ function renderBooks(booksArray){
         const statusWrapper = document.createElement('div');
         statusWrapper.classList.add('status-wrapper');
 
-        const statusBadge = document.createElement('span');
-        statusBadge.classList.add('status-badge');
+        const statusSelect = document.createElement('select');
+        statusSelect.classList.add('book-status-select');
 
-        switch (book.status){
-            case 'completed':
-                statusBadge.classList.add('status-completed');
-                statusBadge.textContent = "Прочитано";
-                break;
-            case 'reading':
-                statusBadge.classList.add('status-reading');
-                statusBadge.textContent = "Читаю";
-                break;
-            case 'planned':
-                statusBadge.classList.add('status-planned');
-                statusBadge.textContent = "В планах";
-                break;
-            case 'gaveup':
-                statusBadge.classList.add('status-gaveup');
-                statusBadge.textContent = "Закинуто";
-                break;
-        }
+        statusSelect.classList.add(`status-${book.status}`);
 
-        statusWrapper.append(statusBadge);
+        const statuses = [
+            { value: 'reading', text: 'Читаю' },
+            { value: 'completed', text: 'Прочитано' },
+            { value: 'planned', text: 'В планах' },
+            { value: 'gaveup', text: 'Закинуто' },
+        ];
+        statuses.forEach(st =>{
+            const option = document.createElement('option');
+            option.value = st.value;
+            option.textContent = st.text;
+            if (book.status === st.value){
+                option.selected = true;
+            }
+            statusSelect.appendChild(option);
+        });
+        statusSelect.addEventListener('change', (e) => {
+            statusSelect.className = 'book-status-select';
+            statusSelect.classList.add(`status-${e.target.value}`);
+        });
+        statusWrapper.append(statusSelect);
 
         card.append(cover, title, author, statusWrapper);
         listContainer.append(card);
@@ -110,7 +114,7 @@ const dailyPages = pagesPerDay(totalPages, dayCount);
 console.log(`Середня кількість прочитаних сторінок на день(${dayCount} днів): ${dailyPages} стор.`);
 
 
-//Обробка події submit для додавання нової книги без перевантаження
+//Обробка події submit для додавання нової книги з форми без перевантаження
 const form = document.querySelector('#add-book form');
 form.addEventListener('submit', event =>{
     //скасування стандартного перевантаження
@@ -142,7 +146,7 @@ form.addEventListener('submit', event =>{
 });
 
 
-//валідація поля автора(щоб не складалося лише з цифр)
+//валідація поля автора, щоб не складалося лише з цифр
 const authorInput = document.querySelector('#book-author');
 authorInput.addEventListener('input', () =>{
     const value = authorInput.value;
@@ -159,7 +163,7 @@ authorInput.addEventListener('input', () =>{
 listContainer.addEventListener('change', event =>{
     if(event.target.classList.contains('book-status-select')){
         const card = event.target.closest('.card');
-        const index = Array.form(listContainer.children).indexOf(card);
+        const index = Array.from(listContainer.children).indexOf(card);
 
         const newStatus = event.target.value;
         books[index].status = newStatus;
@@ -168,3 +172,79 @@ listContainer.addEventListener('change', event =>{
         renderBooks(books);
     }
 });
+
+// Створення елементів для повідомлень API та кнопки оновлення в DOM
+const sectionMyBooks = document.querySelector('#my-books');
+const messageContainer = document.createElement('div');
+messageContainer.id = 'api-message-container';
+sectionMyBooks.insertBefore(messageContainer, listContainer);
+
+// Створення кнопки оновити
+const refreshButton = document.createElement('button');
+refreshButton.textContent = 'Оновити список із сервера';
+refreshButton.type = 'button';
+refreshButton.style.margin = '10px 0';
+refreshButton.classList.add('refresh-btn');
+sectionMyBooks.insertBefore(refreshButton, listContainer);
+
+function showApiMessage(text, isError = false) {
+    messageContainer.textContent = text;
+    messageContainer.style.color = isError ? 'red' : 'green';
+}
+
+// стоворення async-функції для завантаження даних із сервера
+async function loadBooksData(){
+    showApiMessage('Завантаження даниз із сервера...', false);
+    refreshButton.disabled = true;
+
+    try{
+        const response = await fetch(API_URL);
+
+        if(!response.ok){
+            throw new Error('Помилка серверу: код ${responce.status}');
+        }
+
+        //розбір json та виведення структури у консоль
+        const data = await response.json();
+        console.log('Отримані дані від API', data);
+
+        if(!data.docs || data.docs.length === 0){
+            throw new Error('За запитом нічого не знайдено');
+        }
+
+        //Адаптація полів відповіді API (title, author_name, median_pages) та виведення в DOM
+        const apiBooks = data.docs.slice(0,5).map(item => ({
+            title: item.title,
+            author: item.author_name ? item.author_name.join(', '): 'Невідомий автор',
+            page: item.number_of_pages_median || 300,
+            finished: false,
+            status: 'planned'
+        }));
+
+        // Оновлення глобального масиву та рендер списока
+        books = apiBooks;
+        renderBooks(apiBooks);
+        showApiMessage('Дані успішно завантажено.', false);
+
+    }catch(error){
+        // Обробка помилок та дублювання деталей у console.error
+        console.error('Деталі помилки запиту:', error);
+        let userMessage = 'Не вдалося завантажити дані. Спробуйте пізніше.';
+
+        if (error.message === 'За запитом нічого не знайдено.') {
+            userMessage = 'За запитом нічого не знайдено.';
+        } else if(!navigator.onLine){
+            userMessage = 'Мережевий збій: перевірте підключення до інтернету.';
+        }
+        showApiMessage(userMessage, true);
+        listContainer.innerHTML = `<p class="error-notification">${userMessage}</p>`;
+    }finally{
+        //Вимкнення стану завантаження в блоці finally незалежно від результату
+        refreshButton.disabled = false;
+    }
+} 
+
+//Прив'язка повторного виклику loadBooksData() до кнопки оновлення
+refreshButton.addEventListener('click', () => {
+    loadBooksData();
+})
