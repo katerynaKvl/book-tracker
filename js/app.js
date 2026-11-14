@@ -209,7 +209,7 @@ async function loadBooksData(){
         console.log('Отримані дані від API', data);
 
         if(!data.docs || data.docs.length === 0){
-            throw new Error('За запитом нічого не знайдено');
+            throw new Error('За запитом нічого не знайдено.');
         }
 
         //Адаптація полів відповіді API (title, author_name, median_pages) та виведення в DOM
@@ -237,7 +237,7 @@ async function loadBooksData(){
             userMessage = 'Мережевий збій: перевірте підключення до інтернету.';
         }
         showApiMessage(userMessage, true);
-        listContainer.innerHTML = `<p class="error-notification">${userMessage}</p>`;
+        listContainer.innerHTML = '';
     }finally{
         //Вимкнення стану завантаження в блоці finally незалежно від результату
         refreshButton.disabled = false;
