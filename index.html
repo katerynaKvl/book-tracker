@@ -11,79 +11,124 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Трекер прочитаних книг</title>
     <link rel="stylesheet" href="css/style.css" />
+    <!-- Підключення Vue 3 через CDN  -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js" defer></script>
     <script src="js/app.js" defer></script>
   </head>
   <body>
-    <!-- Шапка з назвою застосунку -->
-    <header>
-      <h1>Трекер прочитаних книг</h1>
-      <nav>
-        <ul>
-          <li><a href="#add-book">Додати книгу</a></li>
-          <li><a href="#my-books">Мої книги</a></li>
-          <li><a href="#statistics">Статистика</a></li>
-        </ul>
-      </nav>
-    </header>
-    <div class="page-layout">
-      <main>
-        <!-- Форма додавання книги -->
-        <section id="add-book">
-          <h2>Додати книгу</h2>
-          <form action="#">
-            <div>
-              <label for="book-title">Назва книги:</label>
-              <input
-                type="text"
-                id="book-title"
-                name="title"
-                placeholder="Введіть назву книги..."
-                required
-              />
+    <!-- Головний контейнер Vue-застосунку -->
+    <div id="app">
+      <!-- Шапка з назвою застосунку -->
+      <header>
+        <h1>Трекер прочитаних книг</h1>
+        <nav>
+          <ul>
+            <li><a href="#add-book">Додати книгу</a></li>
+            <li><a href="#my-books">Мої книги</a></li>
+            <li><a href="#statistics">Статистика</a></li>
+          </ul>
+        </nav>
+      </header>
+      
+      <div class="page-layout">
+        <main>
+          <!-- Форма додавання книги -->
+          <section id="add-book">
+            <h2>Додати книгу</h2>
+            <form @submit.prevent="addNewBook">
+              <div>
+                <label for="book-title">Назва книги:</label>
+                <input
+                  type="text"
+                  id="book-title"
+                  v-model.trim="formTitle"
+                  placeholder="Введіть назву книги..."
+                  required
+                />
+              </div>
+
+              <div>
+                <label for="book-author">Автор:</label>
+                <input
+                  type="text"
+                  id="book-author"
+                  v-model.trim="formAuthor"
+                  placeholder="Введіть автора..."
+                  required
+                />
+              </div>
+
+              <div>
+                <label for="book-pages">Кількість сторінок:</label>
+                <input
+                  type="number"
+                  id="book-pages"
+                  v-model.number="formPages"
+                  min="1"
+                  placeholder="Введіть кількість сторінок..."
+                  required
+                />
+              </div>
+
+              <div>
+                <label for="book-status">Статус читання:</label>
+                <select id="book-status" v-model="formStatus">
+                  <option value="reading">Читаю</option>
+                  <option value="completed">Прочитано</option>
+                  <option value="planned">В планах</option>
+                  <option value="gaveup">Закинуто</option>
+                </select>
+              </div>
+              <button type="submit">Зберегти книгу</button>
+            </form>
+          </section>
+
+          <!-- Список книг: динамічний рендер через компонент BookRow -->
+          <section id="my-books">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; border-bottom: 2px solid #260808; padding-bottom: 6px;">
+              <h2 style="margin: 0; border: none; padding: 0;">Мої книги</h2>
+              <button type="button" class="refresh-btn" @click="loadBooksData" :disabled="isLoading">
+                Оновити список із сервера
+              </button>
+            </div>
+            
+            <!-- Контейнер повідомлень для API -->
+            <div id="api-message-container" v-if="apiMessage" :style="{ color: isApiError ? 'red' : 'green', marginBottom: '10px' }">
+              {{ apiMessage }}
             </div>
 
-            <div>
-              <label for="book-author">Автор:</label>
-              <input
-                type="text"
-                id="book-author"
-                name="author"
-                placeholder="Введіть автора..."
-                pattern="[^0-9]+"
-                required
-              />
+            <!-- Компонент списку книг з використанням v-for та :key -->
+            <div id="books-list" class="cards">
+              <book-row 
+                v-for="book in books" 
+                :key="book.id" 
+                :book="book"
+                @toggle-status="toggleBookStatus"
+              ></book-row>
             </div>
+          </section>
+        </main>
 
-            <div>
-              <label for="book-pages">Кількість сторінок:</label>
-              <input
-                type="number"
-                id="book-pages"
-                name="pages"
-                min="1"
-                placeholder="Введіть кількість сторінок..."
-                required
-              />
-            </div>
+        <!-- Блок статистики читання (обчислювані властивості / computed) -->
+        <aside id="statistics">
+          <h2>Статистика читання</h2>
+          <p id="books-count">Всього доданих книг: {{ books.length }}</p>
+          <p>Прочитані: {{ completedCount }}</p>
+          <p>В процесі читання: {{ readingCount }}</p>
+          <p>Закинуті: {{ gaveupCount }}</p>
+        </aside>
+      </div>
 
-            <div>
-              <label for="book-status">Статус читання:</label>
-              <select id="book-status" name="status">
-                <option value="reading">Читаю</option>
-                <option value="completed">Прочитано</option>
-                <option value="planned">У планах</option>
-                <option value="gaveup">Закинуто</option>
-              </select>
-            </div>
-            <button type="submit">Зберегти книгу</button>
-          </form>
-        </section>
+      <!-- Підвал -->
+      <footer>
+        <p>Проєкт створено для навчальних цілей. &copy; Коваль К.А. 2026</p>
+      </footer>
+    </div>
+  </body>
+</html>
 
-        <!-- Список книг: картки з автором і статусом -->
-        <section id="my-books">
-          <h2>Мої книги</h2>
-          <div id="books-list" class="cards">
-            <article class="card">
+
+<!--<article class="card">
               <div class="cover-placeholder">Обкладинка</div>
               <h3>Елегантний всесвіт</h3>
               <p class="author">Браян Грін</p>
@@ -126,24 +171,4 @@
               <div class="status-wrapper">
                 <span class="status-badge status-planned">В планах</p>
               </div>
-            </article>
-          </div>
-        </section>
-      </main>
-
-      <!-- Блок статистики читання -->
-      <aside id="statistics">
-        <h2>Статистика читання</h2>
-        <p id="books-count">Всього доданих книг: 0</p>
-        <p>Прочитане за місяць: 4</p>
-        <p>Книги в процесі читання: 2</p>
-        <p>Закинуті книги: 6</p>
-      </aside>
-    </div>
-
-    <!-- Підвал -->
-    <footer>
-      <p>Проєкт створено для навчальних цілей. &copy; Коваль К.А. 2026</p>
-    </footer>
-  </body>
-</html>
+            </article>-->
