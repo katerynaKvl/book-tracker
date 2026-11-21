@@ -116,6 +116,13 @@ const BookRow = {
                     <option value="planned">В планах</option>
                     <option value="gaveup">Закинуто</option>
                 </select>
+                <button 
+                    type="button" 
+                    class="delete-book-btn" 
+                    @click="$emit('delete-book', book.id)"
+                >
+                    Видалити
+                </button>
             </div>
         </article>
     `
@@ -238,6 +245,17 @@ const App = {
             this.formAuthor = '';
             this.formPages = '';
             this.formStatus = 'reading';
+        },
+
+        // Видалення книги з IndexedDB, реактивного стану та localStorage
+        async removeBook(id) {
+            try {
+                await deleteItem(id);
+                this.books = this.books.filter(b => b.id !== id);
+                saveToLocalStorage(this.books);
+            } catch (e) {
+                console.error('Помилка видалення книги з БД:', e);
+            }
         },
 
         // Асинхронне завантаження даних із Open Library API 
