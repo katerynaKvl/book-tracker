@@ -337,3 +337,94 @@ footer{
     background-color: #260808;
     color: #efe4d7;
 }
+
+/* ==========================================
+   Анімований прогрес-бар читання «сторінка X із Y»
+   ========================================== */
+.reading-progress {
+    margin: 8px 0 12px;
+    padding: 8px;
+    background-color: #e6d6c3;
+    border: 1px solid rgba(38, 8, 8, 0.25);
+    border-radius: 4px;
+}
+
+.reading-progress__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: #260808;
+    margin-bottom: 6px;
+}
+
+.reading-progress__track {
+    width: 100%;
+    height: 10px;
+    background-color: #d7c5af;
+    border: 1px solid #260808;
+    border-radius: 999px;
+    overflow: hidden;
+}
+
+.reading-progress__fill {
+    height: 100%;
+    width: 0%;
+    background-color: #593c33;
+    border-radius: 999px;
+    transition: width 0.4s ease;
+}
+
+/* Кольори заповнення прогрес-бару відповідно до статусу книги */
+.reading-progress__fill.progress-reading   { background-color: #9d5100; }
+.reading-progress__fill.progress-completed { background-color: #2b5e3b; }
+.reading-progress__fill.progress-planned   { background-color: #543b81; }
+.reading-progress__fill.progress-gaveup    { background-color: #636363; }
+
+.reading-progress__controls {
+    display: flex;
+    gap: 6px;
+    margin-top: 8px;
+}
+
+.page-progress-input {
+    width: 100%;
+    padding: 4px 6px;
+    font-size: 0.78rem;
+    font-family: inherit;
+    color: #260808;
+    background-color: #efe4d7;
+    border: 1px solid #260808;
+    border-radius: 4px;
+}
+
+.update-progress-btn {
+    padding: 4px 10px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    font-family: inherit;
+    color: #593c33;
+    background-color: #efe4d7;
+    border: 1px solid #260808;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.update-progress-btn:hover {
+    background-color: #593c33;
+    color: #efe4d7;
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}

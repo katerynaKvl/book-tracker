@@ -11,7 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Трекер прочитаних книг</title>
     <link rel="stylesheet" href="css/style.css" />
-    <!-- Підключення Vue 3 через CDN  -->
+    <!-- Підключення Vue 3 через CDN -->
     <script src="https://unpkg.com/vue@3/dist/vue.global.js" defer></script>
     <script src="js/app.js" defer></script>
   </head>
@@ -71,6 +71,17 @@
               </div>
 
               <div>
+                <label for="book-current-page">Прочитано сторінок (опціонально):</label>
+                <input
+                  type="number"
+                  id="book-current-page"
+                  v-model.number="formCurrentPage"
+                  min="0"
+                  placeholder="0"
+                />
+              </div>
+
+              <div>
                 <label for="book-status">Статус читання:</label>
                 <select id="book-status" v-model="formStatus">
                   <option value="reading">Читаю</option>
@@ -105,6 +116,7 @@
                 :book="book"
                 @toggle-status="toggleBookStatus"
                 @delete-book="removeBook"
+                @update-progress="updateBookProgress"
               ></book-row>
             </div>
           </section>
